@@ -1,21 +1,21 @@
-Remove-Item -Path "C:\Users\lfyst\OneDrive\Desktop\edLauncher\bin\windows\*.exe" -Force
+$LOCATIONOUT = "Enter the directory path (no files, only folders) to your exe output"
+$LOCATIONIN = "Enter the directory path to your JAR "
+$ICON = "Enter the path to your icon (yes files, must be .ico)"
+$JARNAME = "Enter the name of ur JAR"
+$EXENAME = "Enter the name of ur output EXE"
+Remove-Item -Path "${LOCATIONIN}\*.exe" -Force
 jpackage `
   --type exe `
-  --name EZDBLauncher `
+  --name ${EXENAME} `
   --app-version 1.0 `
-  --input "C:\Users\lfyst\OneDrive\Desktop\edLauncher\bin\src" `
-  --main-jar "EDL.jar" `
+  --input "${LOCATIONIN}" `
+  --main-jar "${JARNAME}" `
   --main-class "Main" `
-  --icon "C:\Users\lfyst\OneDrive\Desktop\edLauncher\bin\hjh.ico" `
+  --icon "${ICON}" `
   --win-menu `
-  --win-menu-group "EZDB" `
+  --win-menu-group "${EXENAME}" `
   --win-shortcut `
   --win-shortcut-prompt `
-  --description "EZDB Beta Launcher" `
-  --vendor "LFYStch" `
-  --dest "C:\Users\lfyst\OneDrive\Desktop\edLauncher\bin\windows"
-
-Rename-Item `
-  -Path "C:\Users\lfyst\OneDrive\Desktop\edLauncher\bin\windows\EZDBLauncher-1.0.exe" `
-  -NewName "EZ Demon Blood Beta Launcher 1.0.exe"
-
+  --description "..." `
+  --vendor "..." `
+  --dest "${LOCATIONOUT}"
