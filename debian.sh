@@ -1,17 +1,29 @@
+#!/bin/bash
 
+read -p "Enter the directory path to your DEB output folder: " LOCATIONOUT
+read -p "Enter the directory path to your JAR folder: " LOCATIONIN
+read -p "Enter the path to your icon (.png): " ICON
+read -p "Enter the name of your JAR (ex: EDL.jar): " JARNAME
+read -p "Enter the name of your DEB package (no spaces recommended): " PKGNAME
+
+echo "Cleaning old DEBs..."
+rm -f "$LOCATIONOUT"/*.deb 2>/dev/null
+
+
+echo "Running jpackage..."
 jpackage \
   --type deb \
-  --name EZDBLauncher \
+  --name "$PKGNAME" \
   --app-version 1.0 \
-  --input "/mnt/c/Users/lfyst/OneDrive/Desktop/edLauncher/bin/src" \
-  --main-jar "EDL.jar" \
+  --input "$LOCATIONIN" \
+  --main-jar "$JARNAME" \
   --main-class "Main" \
-  --icon "/mnt/c/Users/lfyst/OneDrive/Desktop/edLauncher/bin/EZDBLogo.png" \
+  --icon "$ICON" \
   --linux-shortcut \
-  --linux-menu-group "EZDB" \
-  --description "EZDB Beta Launcher" \
-  --vendor "LFYStch" \
-  --dest "/mnt/c/Users/lfyst/OneDrive/Desktop/edLauncher/bin/debian" \
-  --runtime-image /usr/lib/jvm/java-21-openjdk-amd64
-cd /mnt/c/Users/lfyst/OneDrive/Desktop/edLauncher/bin/debian
-mv ezdblauncher_1.0_amd64.deb 'EZDB Beta Launcher 1.0.deb'
+  --linux-menu-group "$PKGNAME" \
+  --description "..." \
+  --vendor "..." \
+  --runtime-image /usr/lib/jvm/java-21-openjdk-amd64 \
+  --dest "$LOCATIONOUT"
+
+echo "=== Packaging Complete ==="
