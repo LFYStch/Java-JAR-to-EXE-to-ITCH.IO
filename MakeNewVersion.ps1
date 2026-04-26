@@ -1,12 +1,4 @@
 clear
-cd bin
-pushd src
-echo "==Starting JAR Packaging=="
-echo "..."
-jar cfm EDL.jar MANIFEST.MF .
-echo "==JAR Package Complete=="
-popd
-pushd packaging
 echo "==Starting Windows Packaging=="
 echo "..."
 powershell -ExecutionPolicy Bypass -File windows.ps1
